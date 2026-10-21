@@ -12,6 +12,9 @@ import lipsAfterMain from "./assets/lips-after-main.jpg";
 function App() {
   const [isPortfolioOpen, setIsPortfolioOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // Фото на главном экране держится 2 секунды, затем плавно проявляется видео
+  const [isVideoReady, setIsVideoReady] = useState(false);
+  const [isVideoVisible, setIsVideoVisible] = useState(false);
 
   // Блокируем скролл фона и закрываем окно по Escape
   useEffect(() => {
@@ -26,6 +29,23 @@ function App() {
       window.removeEventListener("keydown", onKeyDown);
     };
   }, [isPortfolioOpen]);
+
+  // Через 2 секунды разрешаем показ видео
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVideoReady(true);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Даём видео начать загрузку/воспроизведение и плавно проявляем его
+  useEffect(() => {
+    if (!isVideoReady) return;
+    const fade = setTimeout(() => {
+      setIsVideoVisible(true);
+    }, 150);
+    return () => clearTimeout(fade);
+  }, [isVideoReady]);
 
   // Закрываем мобильное меню по Escape
   useEffect(() => {
@@ -214,19 +234,31 @@ function App() {
           </div>
         </div>
 
-        {/* Правая колонка: Эстетичное фоновое видео-превью */}
-        <div className="relative justify-self-center md:justify-self-end w-full max-w-[480px]">
+        {/* Правая колонка: фото-обложка с плавным видео поверх */}
+        <div className="relative justify-self-center md:justify-self-end w-full max-w-[480px] aspect-[4/5] transform md:rotate-2 hover:rotate-0 transition duration-500">
           <div className="absolute inset-0 bg-rose-200/50 rounded-full filter blur-3xl -z-10 transform scale-90 translate-x-4 translate-y-4"></div>
-          <video
-            src="/videos/hero-video.mp4"
-            poster="/hero-photo.jpg"
-            aria-label="Работы Нателы — перманентный макияж"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="aspect-[4/5] w-full object-cover rounded-2xl shadow-2xl border-4 border-white transform md:rotate-2 hover:rotate-0 transition duration-500"
+
+          {/* Обложка: фото жены держится 2 секунды */}
+          <img
+            src="/hero-photo.jpg"
+            alt="Работы Нателы — перманентный макияж"
+            className="absolute inset-0 h-full w-full object-cover rounded-2xl shadow-2xl border-4 border-white"
           />
+
+          {/* Видео проявляется поверх после таймера */}
+          {isVideoReady && (
+            <video
+              src="/videos/hero-video.mp4"
+              aria-label="Работы Нателы — перманентный макияж"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className={`absolute inset-0 h-full w-full object-cover rounded-2xl shadow-2xl border-4 border-white transition-opacity duration-1000 ease-in-out ${
+                isVideoVisible ? "opacity-100" : "opacity-0"
+              }`}
+            />
+          )}
         </div>
       </main>
 
