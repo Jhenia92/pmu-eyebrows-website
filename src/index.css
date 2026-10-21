@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@layer base {
+  /* Страховка от горизонтального скролла на узких экранах (320–480px) */
+  html,
+  body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  /* Крупные цели для пальца: интерактивные элементы не меньше 44px по высоте */
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
