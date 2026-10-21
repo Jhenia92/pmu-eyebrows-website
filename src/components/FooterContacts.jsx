@@ -105,7 +105,7 @@ function FaqItem({ item, isOpen, onToggle }) {
 }
 
 export default function FooterContacts() {
-  const [openIndex, setOpenIndex] = useState(0);
+  const [openIndex, setOpenIndex] = useState(-1);
 
   return (
     <footer className="w-full bg-stone-900 text-stone-100">
