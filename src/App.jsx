@@ -218,8 +218,8 @@ function App() {
         <div className="relative justify-self-center md:justify-self-end w-full max-w-[480px]">
           <div className="absolute inset-0 bg-rose-200/50 rounded-full filter blur-3xl -z-10 transform scale-90 translate-x-4 translate-y-4"></div>
           <video
-            src="/src/assets/hero-video.mp4"
-            poster="/src/assets/hero-photo.jpg"
+            src="/videos/hero-video.mp4"
+            poster="/hero-photo.jpg"
             aria-label="Работы Нателы — перманентный макияж"
             autoPlay
             loop
