@@ -198,15 +198,19 @@ function App() {
         )}
       </header>
 
-      {/* 2. ГЛАВНЫЙ ЭКРАН (HERO SECTION) */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 pt-24 md:pt-36 pb-12 md:pb-24 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+      <main>
+        {/* 2. ГЛАВНЫЙ ЭКРАН (HERO SECTION) */}
+        <section
+          aria-labelledby="hero-heading"
+          className="max-w-7xl mx-auto px-4 sm:px-6 pt-24 md:pt-36 pb-12 md:pb-24 grid md:grid-cols-2 gap-8 md:gap-12 items-center"
+        >
         {/* Левая колонка: Текст и Оффер */}
         <div className="space-y-8 text-center md:text-left">
           <div className="inline-flex items-center gap-2 bg-rose-100/60 border border-rose-200/50 px-3 py-1 rounded-full text-xs font-semibold text-rose-600 tracking-wide uppercase">
             ✨ Естественный результат на 1.5–2 года
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-6xl font-serif font-bold text-stone-950 leading-[1.15]">
+          <h1 id="hero-heading" className="text-3xl sm:text-4xl lg:text-6xl font-serif font-bold text-stone-950 leading-[1.15]">
             Перманентный макияж, который{" "}
             <span className="decoration-rose-400 decoration-wavy underline-offset-8">подчеркнет</span> вашу нежность
           </h1>
@@ -260,7 +264,7 @@ function App() {
             />
           )}
         </div>
-      </main>
+        </section>
 
       {/* 3. ИНТЕРАКТИВНОЕ ПОРТФОЛИО (СЛАЙДЕР ДО/ПОСЛЕ) */}
       <section id="portfolio" className="bg-stone-50 py-14 md:py-20 border-t border-stone-100">
@@ -279,6 +283,8 @@ function App() {
           <Prices />
         </div>
       </section>
+      </main>
+
       {/* 5. ФУТЕР: FAQ И КОНТАКТЫ */}
       <FooterContacts />
 
